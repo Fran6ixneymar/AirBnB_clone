@@ -1,81 +1,173 @@
-# Airbnb Clone
+# The AirBnB Clone Project
+![AirBnB Logo](https://www.pngitem.com/pimgs/m/132-1322125_transparent-background-airbnb-logo-hd-png-download.png)
 
-This project is an Airbnb clone, which aims to replicate some of the core functionalities of the popular accommodation rental platform. The clone is implemented as a Python package with a command interpreter, allowing users to interact with the application through a command-line interface.
+## Project Description
+This is the first part of the AirBnB clone project where we worked on the backend of the project whiles interfacing it with a console application with the help of the cmd module in python.
 
-## Command Interpreter
+Data (python objects) generated are stored in a json file and can be accessed with the help of the json module in python
 
-The command interpreter is built using the `cmd` module in Python. It provides a command-line interface where users can enter commands to perform various operations related to managing accommodations, bookings, users, and more.
+## Description of the command interpreter:
+The interface of the application is just like the Bash shell except that this has a limited number of accepted commands that were solely defined for the purposes of the usage of the AirBnB website.
 
-### How to Start the Command Interpreter
+This command line interpreter  serves as the frontend of the web app where users can interact with the backend which was developed with python OOP programming.
 
-To start the command interpreter, you need to run the `console.py` file. You can do this by executing the following command in your terminal:
+Some of the commands available are:
+- show
+- create
+- update
+- destroy
+- count
 
-```
-python console.py
-```
+And as part of the implementation of the command line interpreter coupled with the backend and file storage system, the folowing actions can be performed:
+-   Creating new objects (ex: a new User or a new Place)
+-   Retrieving an object from a file, a database etc…
+-   Doing operations on objects (count, compute stats, etc…)
+-   Updating attributes of an object
+-   Destroying an object
 
-### How to Use the Command Interpreter
+## How to start it
+These instructions will get you a copy of the project up and running on your local machine (Linux distro) for development and testing purposes.
 
-Once the command interpreter is running, you can enter commands to interact with the application. The commands follow a specific syntax: `command [arguments]`.
+## Installing
 
-Here are some of the commands available in the command interpreter:
-
-- `create <object>`: Creates a new object. Available objects include "accommodation," "booking," and "user." You can specify additional arguments to provide details for the object.
-
-- `show <object> <id>`: Shows the details of a specific object. You need to provide the object type (e.g., "accommodation") and the object's ID.
-
-- `update <object> <id> <attribute> <value>`: Updates a specific attribute of an object. You need to provide the object type, the object's ID, the attribute name, and the new value.
-
-- `delete <object> <id>`: Deletes a specific object. You need to provide the object type and the object's ID.
-
-- `list <object>`: Lists all objects of a specific type.
-
-These are just a few examples of the commands available in the command interpreter. You can explore the application further by trying out different commands and their variations.
-
-### Examples
-
-Here are some examples of how to use the command interpreter:
-
-1. Creating a new accommodation:
+You will need to clone the repository of the project from Github. This will contain the simple shell program and all of its dependencies.
 
 ```
-create accommodation --name "Cozy Cabin" --location "Mountain View" --price 100
+git clone https://github.com/jzamora5/AirBnB_clone.git
+```
+After cloning the repository you will have a folder called AirBnB_clone. In here there will be several files that allow the program to work.
+
+> /console.py : The main executable of the project, the command interpreter.
+>
+> models/engine/file_storage.py: Class that serializes instances to a JSON file and deserializes JSON file to instances
+> 
+> models/__ init __.py:  A unique `FileStorage` instance for the application
+> 
+> models/base_model.py: Class that defines all common attributes/methods for other classes.
+> 
+> models/user.py: User class that inherits from BaseModel
+> 
+>models/state.py: State class that inherits from BaseModel
+>
+>models/city.py: City class that inherits from BaseModel
+>
+>models/amenity.py: Amenity class that inherits from BaseModel
+>
+>models/place.py: Place class that inherits from BaseModel
+>
+>models/review.py: Review class that inherits from BaseModel
+
+
+
+## How to use it
+It can work in two different modes:
+
+
+**Interactive** and **Non-interactive**.
+
+In **Interactive mode**, the console will display a prompt (hbnb) indicating that the user can write and execute a command. After the command is run, the prompt will appear again a wait for a new command. This can go indefinitely as long as the user does not exit the program.
+
+```
+$ ./console.py
+(hbnb) help
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+
+(hbnb) 
+(hbnb) 
+(hbnb) quit
+$
 ```
 
-This command creates a new accommodation with the name "Cozy Cabin," located in "Mountain View," and priced at $100.
+In **Non-interactive mode**, the shell will need to be run with a command input piped into its execution so that the command is run as soon as the Shell starts. In this mode no prompt will appear, and no further input will be expected from the user.
 
-2. Showing details of an accommodation:
-
-```
-show accommodation 123
-```
-
-This command displays the details of the accommodation with the ID 123.
-
-3. Updating an accommodation's price:
 
 ```
-update accommodation 123 price 150
+$ echo "help" | ./console.py
+(hbnb)
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb) 
+$
+$ cat test_help
+help
+$
+$ cat test_help | ./console.py
+(hbnb)
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb) 
+$
 ```
 
-This command updates the price of the accommodation with the ID 123 to $150.
+## Format of Command Input
 
-4. Deleting an accommodation:
+In order to give commands to the console, these will need to be piped through an echo in case of  **Non-interactive mode**.
+
+In  **Interactive Mode**  the commands will need to be written with a keyboard when the prompt appears and will be recognized when an enter key is pressed (new line). As soon as this happens, the console will attempt to execute the command through several means or will show an error message if the command didn't run successfully. In this mode, the console can be exited using the **CTRL + D** combination,  **CTRL + C**, or the command **quit** or **EOF**.
+
+## Arguments
+
+Most commands have several options or arguments that can be used when executing the program. In order for the Shell to recognize those parameters, the user must separate everything with spaces.
+
+Example:
 
 ```
-delete accommodation 123
+
+user@ubuntu:~/AirBnB$ ./console.py
+(hbnb) create BaseModel
+49faff9a-6318-451f-87b6-910505c55907
+user@ubuntu:~/AirBnB$ ./console.py
+
 ```
 
-This command deletes the accommodation with the ID 123.
-
-5. Listing all accommodations:
+or
 
 ```
-list accommodation
+user@ubuntu:~/AirBnB$ ./console.py $ echo "create BaseModel" | ./console.py
+(hbnb)
+e37ebcd3-f8e1-4c1f-8095-7a019070b1fa
+(hbnb)
+user@ubuntu:~/AirBnB$ ./console.py
 ```
 
-This command lists all the accommodations available in the application.
+## Available commands and what they do
 
-These examples illustrate how to interact with the command interpreter to perform various operations within the Airbnb clone.
+The recognizable commands by the interpreter are the following:
 
-Feel free to explore more commands and experiment with different options to gain a deeper understanding of the functionalities offered by the Airbnb clone.
+|Command| Description |
+|--|--|
+| **quit or EOF** | Exits the program |
+| **Usage** | By itself |
+| **-----** | **-----** |
+| **help** | Provides a text describing how to use a command.  |
+| **Usage** | By itself --or-- **help <command\>** |
+| **-----** | **-----** |
+| **create** | Creates a new instance of a valid `Class`, saves it (to the JSON file) and prints the `id`.  Valid classes are: BaseModel, User, State, City, Amenity, Place, Review. |
+| **Usage** | **create <class name\>**|
+| **-----** | **-----** |
+| **show** | Prints the string representation of an instance based on the class name and `id`  |
+| **Usage** | **show <class name\> <id\>** --or-- **<class name\>.show(<id\>)**|
+| **-----** | **-----** |
+| **destroy** | Deletes an instance based on the class name and `id` (saves the change into a JSON file).  |
+| **Usage** | **destroy <class name\> <id\>** --or-- **<class name>.destroy(<id>)** |
+| **-----** | **-----** |
+| **all** | Prints all string representation of all instances based or not on the class name.  |
+| **Usage** | By itself or **all <class name\>** --or-- **<class name\>.all()** |
+| **-----** | **-----** |
+| **update** | Updates an instance based on the class name and `id` by adding or updating attribute (saves the changes into a JSON file).  |
+| **Usage** | **update <class name\> <id\> <attribute name\> "<attribute value\>"** ---or--- **<class name\>.update(<id\>, <attribute name\>, <attribute value\>)** --or-- **<class name\>.update(<id\>, <dictionary representation\>)**|
+| **-----** | **-----** |
+| **count** | Retrieve the number of instances of a class.  |
+| **Usage** | **<class name\>.count()** |
+
+## Author
+
+Emmanuel Ntaadu Gyamfi<kwamealabama@gmail.com>
+Ifebuko Chigemezu Francis<ifebukofrancis@gmail.com>
