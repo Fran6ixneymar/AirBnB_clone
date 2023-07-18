@@ -8,6 +8,8 @@ import re
 import json
 
 class HBNBCommand(cmd.Cmd):
+
+
     """Command interpreter for HBNB application."""
 
     prompt = "(hbnb) "
